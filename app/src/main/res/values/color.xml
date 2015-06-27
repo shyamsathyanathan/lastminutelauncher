@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="material_amber_primary_dark">#FFA000</color>
+    <color name="material_amber_primary">#FFC107</color>
+    <color name="material_amber_primary_light">#FFECB3</color>
+    <color name="material_text_icons">#212121</color>
+    <color name="material_accent">#795548</color>
+    <color name="material_text_primary">#212121</color>
+    <color name="material_text_secondary">#727272</color>
+    <color name="material_divider">#B6B6B6</color>
+    <color name="actionbar_text">#EEEEEE</color>
+</resources>
