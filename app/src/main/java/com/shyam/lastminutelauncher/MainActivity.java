@@ -1,9 +1,15 @@
 package com.shyam.lastminutelauncher;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.shyam.lastminutelauncher.utils.CalendarUtils;
+
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -12,6 +18,9 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActionBar actionBar = getSupportActionBar();
+        getSupportActionBar().setTitle(CalendarUtils.getFormattedDate());
     }
 
     @Override
