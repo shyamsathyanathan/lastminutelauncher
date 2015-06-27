@@ -5,14 +5,23 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ListAdapter;
 
+import com.shyam.lastminutelauncher.adapter.GridArrayAdapter;
+import com.shyam.lastminutelauncher.model.AppDetail;
+import com.shyam.lastminutelauncher.utils.AppLoader;
 import com.shyam.lastminutelauncher.utils.CalendarUtils;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +31,12 @@ public class MainActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(CalendarUtils.getFormattedDate());
 
+        gridView = (GridView) findViewById(R.id.gridView);
 
+        List<AppDetail> apps = new AppLoader(this).getApps();
+        ArrayAdapter<AppDetail> adapter = new GridArrayAdapter(this, apps).getAdapter();
+
+        gridView.setAdapter(adapter);
     }
 
     @Override
