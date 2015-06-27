@@ -21,9 +21,9 @@ public class AppLoader {
         mContext = context;
     }
 
-    public List<AppDetail> getApps() {
+    public ArrayList<AppDetail> getApps() {
         PackageManager pm = mContext.getPackageManager();
-        List<AppDetail> apps = new ArrayList<>();
+        ArrayList<AppDetail> apps = new ArrayList<>();
 
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);

@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 /**
  * Created by shyam on 27/6/15.
  */
-public class AppDetail {
+public class AppDetail implements Comparable<AppDetail> {
 
     private CharSequence label;
     private CharSequence name;
@@ -33,5 +33,10 @@ public class AppDetail {
 
     public void setIcon(Drawable icon) {
         this.icon = icon;
+    }
+
+    @Override
+    public int compareTo(AppDetail app) {
+        return this.getLabel().hashCode() - app.getLabel().hashCode();
     }
 }

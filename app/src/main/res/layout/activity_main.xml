@@ -5,6 +5,7 @@
     <GridView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
+        android:paddingLeft="10dp"
         android:id="@+id/gridView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"

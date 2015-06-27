@@ -29,6 +29,20 @@ public class CalendarUtils {
     }
 
     private static String getMonth(int month) {
-        return "June";
+        switch(month) {
+            case Calendar.JANUARY: return "January";
+            case Calendar.FEBRUARY: return "February";
+            case Calendar.MARCH: return "March";
+            case Calendar.APRIL: return "April";
+            case Calendar.MAY: return "May";
+            case Calendar.JUNE: return "June";
+            case Calendar.JULY: return "July";
+            case Calendar.AUGUST: return "August";
+            case Calendar.SEPTEMBER: return "September";
+            case Calendar.OCTOBER: return "October";
+            case Calendar.NOVEMBER: return "November";
+            case Calendar.DECEMBER: return "December";
+            default: return "";
+        }
     }
 }
