@@ -20,7 +20,9 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getSupportActionBar();
-        getSupportActionBar().setTitle(CalendarUtils.getFormattedDate());
+        actionBar.setTitle(CalendarUtils.getFormattedDate());
+
+
     }
 
     @Override
