@@ -41,17 +41,37 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         int timesOpened = 0;
         Cursor cursor = getData(packageName);
-        if(cursor != null) {
-            timesOpened = cursor.getColumnIndex(SQLiteConfig.COLUMN_TIMES_OPENED);
+        if(cursor != null && cursor.getCount() > 0) {
+            try {
+                timesOpened = cursor.getInt(cursor.getColumnIndex(SQLiteConfig.COLUMN_TIMES_OPENED));
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
         }
+        timesOpened++;
         ContentValues contentValues = new ContentValues();
         contentValues.put(SQLiteConfig.COLUMN_PACKAGE_NAME, packageName);
-        contentValues.put(SQLiteConfig.COLUMN_TIMES_OPENED, ++timesOpened);
+        contentValues.put(SQLiteConfig.COLUMN_TIMES_OPENED, timesOpened);
         contentValues.put(SQLiteConfig.COLUMN_APP_LABEL, app.getLabel().toString());
 
         db.update(SQLiteConfig.TABLE_NAME, contentValues, SQLiteConfig.COLUMN_PACKAGE_NAME + "=?", new String[]{packageName});
 
         return true;
+    }
+
+    public boolean insertAppHits(AppDetail app) {
+        if(getData(app.getName().toString()) == null) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(SQLiteConfig.COLUMN_PACKAGE_NAME, app.getName().toString());
+            contentValues.put(SQLiteConfig.COLUMN_TIMES_OPENED, 0);
+            contentValues.put(SQLiteConfig.COLUMN_APP_LABEL, app.getLabel().toString());
+
+            db.insert(SQLiteConfig.TABLE_NAME, null, contentValues);
+
+            return true;
+        }
+        return false;
     }
 
     public Cursor getData(String packageName){
@@ -66,8 +86,15 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getAllData() {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "select * from " + SQLiteConfig.TABLE_NAME + " order by "
-                + SQLiteConfig.COLUMN_TIMES_OPENED + ", " + SQLiteConfig.COLUMN_APP_LABEL;
+                + SQLiteConfig.COLUMN_TIMES_OPENED + " desc, " + SQLiteConfig.COLUMN_APP_LABEL;
         Cursor cursor = db.rawQuery(query, null);
         return cursor;
+    }
+
+    public void resetTimesOpened() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(SQLiteConfig.COLUMN_TIMES_OPENED, 0);
+        db.update(SQLiteConfig.TABLE_NAME, contentValues, null, null);
     }
 }

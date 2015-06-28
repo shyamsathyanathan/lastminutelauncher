@@ -9,9 +9,6 @@ import com.shyam.lastminutelauncher.database.DBHelper;
 import com.shyam.lastminutelauncher.model.AppDetail;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Created by shyam on 28/6/15.
@@ -29,6 +26,7 @@ public class AppSorter {
         Cursor cursor = new DBHelper(mContext).getAllData();
         if(cursor != null) {
             try {
+                cursor.moveToFirst();
                 do {
                     AppDetail app = new AppDetail();
                     app.setLabel(cursor.getString(cursor.getColumnIndex(SQLiteConfig.COLUMN_APP_LABEL)));
@@ -39,9 +37,9 @@ public class AppSorter {
             } catch (Exception e) {
                 return apps;
             }
-            return sortedApps;
         }
-        return apps;
+
+        return sortedApps;
     }
 
     private Drawable getIconFromName(String packageName, ArrayList<AppDetail> apps) {

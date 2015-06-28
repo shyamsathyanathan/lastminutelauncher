@@ -8,7 +8,7 @@
 
         <item name="colorAccent">@color/material_accent</item>
 
-        <item name="actionBarStyle">@style/CustomActionBarTheme</item>
+        <!-- <item name="actionBarStyle">@style/CustomActionBarTheme</item> -->
 
     </style>
 
